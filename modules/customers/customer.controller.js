@@ -170,6 +170,11 @@ export const loginCustomer = async (req, res) => {
       return res.status(400).json({ message: 'Invalid password' });
     }
 
+    // التحقق مما إذا كان العميل قد أكد OTP
+    if (!customer.isVerified) {
+      return res.status(400).json({ message: 'Please verify your email by submitting the OTP before logging in' });
+    }
+
     // البحث عن التوكن الخاص بالعميل في قاعدة البيانات
     let customerToken = await Token.findOne({ customer: customer._id });
 
@@ -198,6 +203,7 @@ export const loginCustomer = async (req, res) => {
     res.status(400).json({ message: 'Error logging in', error });
   }
 };
+
   
   // Function لتحديث بيانات العميل
 export const updateCustomer = async (req, res) => {
