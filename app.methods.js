@@ -9,8 +9,7 @@ dotenv.config();
 export const appMethods = (app, express) => {
     app.use(express.json());
     app.use(morgan("dev"));
-    app.use(cors({ origin: '*' })); // السماح بطلبات من أي مصدر
-      
+    app.use(cors())
     app.use("/apis/customer", CustomerRouter);
     app.use("/apis/accountBank", AccountBankRouter);
     app.use("/apis/transaction", TransactionRouter);
