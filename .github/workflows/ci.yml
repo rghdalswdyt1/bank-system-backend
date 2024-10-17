@@ -1,0 +1,46 @@
+name: CI for Bank System Backend
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+  # Optional: Non-functional tests (e.g., performance, security)
+  performance_test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Artillery
+      run: npm install -g artillery
+
+    - name: Run performance tests
+      run: artillery run performance_test.yml
+
+  security_test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@v1
+      with:
+        args: test
