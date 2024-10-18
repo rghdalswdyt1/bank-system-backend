@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+ "scripts": {
+    "lint": "eslint .",   // Lint all files in the project
+    "test": "jest",       // Run all Jest tests
+    "start": "node index.js" // Start the application
   },
   "keywords": [],
   "author": "",
