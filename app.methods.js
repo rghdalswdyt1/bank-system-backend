@@ -94,7 +94,6 @@ export const appMethods = (app, express) => {
         });
     });
 
-    // Not Found Page Router
     app.all("*", (req, res, next) => {
         return next(new Error("Not Found Page!", { cause: 404 }));
     });
