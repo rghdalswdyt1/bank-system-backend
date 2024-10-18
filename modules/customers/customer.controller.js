@@ -36,6 +36,10 @@ export const createCustomer = async (req, res) => {
       if (!name || !email || !phone || !address || !dateOfBirth || !nationalID || !password) {
           return res.status(400).json({ message: 'All fields are required' });
       }
+       // Convert name, email, and address to lowercase
+      const lowerCaseName = name.toLowerCase();
+      const lowerCaseEmail = email.toLowerCase();
+      const lowerCaseAddress = address.toLowerCase();
 
       // Check if customer already exists by email or national ID
       let existingCustomer = await Customer.findOne({ $or: [{ email }, { nationalID }] });
@@ -51,10 +55,10 @@ export const createCustomer = async (req, res) => {
 
       // Create the new customer
       const customer = new Customer({ 
-          name, 
-          email, 
+          name : lowerCaseName, 
+          email : lowerCaseEmail, 
           phone, 
-          address, 
+          address : lowerCaseAddress, 
           dateOfBirth, 
           nationalID, 
           password: hashPassword,
