@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
  "scripts": {
-    "lint": "eslint .",   // Lint all files in the project
-    "test": "jest",       // Run all Jest tests
-    "start": "node index.js" // Start the application
+    "lint": "eslint",   
+    "test": "jest",       
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
