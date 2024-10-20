@@ -1,14 +1,21 @@
 import morgan from "morgan";
+
 import dotenv from "dotenv";
+
 import CustomerRouter from "./modules/customers/customer.router.js";
+
 import AccountBankRouter from "./modules/accountsBank/account.router.js";
+
 import TransactionRouter from "./modules/transactionBank/transaction.router.js"; 
+
 import cors from "cors";
+
 dotenv.config();
 
 export const appMethods = (app, express) => {
     app.use(express.json());
     app.use(morgan("dev"));
+
     const corsOptions = {
         origin: 'https://bank-system-website.vercel.app', // السماح فقط بهذا النطاق
         methods: ['GET', 'POST', 'PUT', 'DELETE'], // تحديد الطرق المسموحة
