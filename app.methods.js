@@ -9,7 +9,14 @@ dotenv.config();
 export const appMethods = (app, express) => {
     app.use(express.json());
     app.use(morgan("dev"));
-    app.use(cors());
+    const corsOptions = {
+        origin: 'https://bank-system-website.vercel.app', // السماح فقط بهذا النطاق
+        methods: ['GET', 'POST', 'PUT', 'DELETE'], // تحديد الطرق المسموحة
+        allowedHeaders: ['Content-Type', 'Authorization'], // السماح للرؤوس المحددة
+        credentials: true // للسماح بإرسال الكوكيز إذا كانت مطلوبة
+      };
+      
+      app.use(cors(corsOptions));
     app.use("/apis/customer", CustomerRouter);
     app.use("/apis/accountBank", AccountBankRouter);
     app.use("/apis/transaction", TransactionRouter);
